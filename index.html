@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskify</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        Taskify
+    </header>
+    <div class="container">
+        <div class="task-form">
+            <input type="text" id="input" placeholder="Digite sua tarefa">
+            <button onclick="submit()">Cadastrar</button>
+        </div>
+    </div>
+    <ul id="list">
+    </ul>
+    <script>
+        function submit() {
+            var ul = document.getElementById("list");
+            var li = document.createElement("li");
+            var textInput = document.getElementById("input").value.trim();
+            if (textInput === "") {
+                alert("Por favor, insira uma tarefa válida.");
+                return;
+            }
+            li.textContent = textInput;
+
+            var deleteButton = document.createElement("button");
+            deleteButton.textContent = "X";
+            deleteButton.style.backgroundColor = "#e74c3c";
+            deleteButton.style.color = "white";
+            deleteButton.style.border = "none";
+            deleteButton.style.borderRadius = "4px";
+            deleteButton.style.cursor = "pointer";
+            deleteButton.onclick = function() {
+                ul.removeChild(li);
+            };
+            li.appendChild(deleteButton);
+
+            ul.appendChild(li);
+            document.getElementById("input").value = "";
+        }
+    </script>
+</body>
+</html>
