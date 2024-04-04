@@ -27,19 +27,35 @@
                 alert("Por favor, insira uma tarefa válida.");
                 return;
             }
-            li.textContent = textInput;
+
+            var textSpan = document.createElement("span");
+            textSpan.textContent = textInput;
+            textSpan.classList.add("item-text");
+
+            var buttonsContainer = document.createElement("div");
+            buttonsContainer.classList.add("buttons-container");
 
             var deleteButton = document.createElement("button");
             deleteButton.textContent = "X";
-            deleteButton.style.backgroundColor = "#e74c3c";
-            deleteButton.style.color = "white";
-            deleteButton.style.border = "none";
-            deleteButton.style.borderRadius = "4px";
-            deleteButton.style.cursor = "pointer";
             deleteButton.onclick = function() {
                 ul.removeChild(li);
             };
-            li.appendChild(deleteButton);
+
+            var editButton = document.createElement("button");
+            editButton.textContent = "Editar";
+            editButton.style.backgroundColor = "#333";
+            editButton.onclick = function() {
+                var newText = prompt("Digite o novo texto:");
+                if (newText !== null) {
+                    textSpan.textContent = newText;
+                }
+            };
+
+            buttonsContainer.appendChild(deleteButton);
+            buttonsContainer.appendChild(editButton);
+
+            li.appendChild(textSpan);
+            li.appendChild(buttonsContainer);
 
             ul.appendChild(li);
             document.getElementById("input").value = "";
